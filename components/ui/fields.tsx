@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 import { Icon } from "@/components/Icon";
 
-/* ---- Text input with a floating label (matches the Stitch auth screens) -- */
+/* ---- Text input with a label above (no overlap, fully accessible) -------- */
 
 interface FloatingInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
@@ -14,24 +14,20 @@ interface FloatingInputProps extends React.InputHTMLAttributes<HTMLInputElement>
 export const FloatingInput = forwardRef<HTMLInputElement, FloatingInputProps>(
   function FloatingInput({ id, label, trailing, className, ...props }, ref) {
     return (
-      <div className="floating-label-input relative flex flex-col">
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor={id} className="font-label-md text-label-md text-on-surface-variant">
+          {label}
+        </label>
         <div className="flex h-touch-target w-full items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-4 transition-all focus-within:border-2 focus-within:border-primary">
           <input
             ref={ref}
             id={id}
-            placeholder=" "
             className={cn(
-              "peer h-full w-full border-none bg-transparent text-body-md text-on-surface outline-none focus:ring-0",
+              "h-full w-full border-none bg-transparent text-body-md text-on-surface outline-none placeholder:text-on-surface-variant/60 focus:ring-0",
               className,
             )}
             {...props}
           />
-          <label
-            htmlFor={id}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-surface-container-lowest px-1 text-body-md text-on-surface-variant"
-          >
-            {label}
-          </label>
           {trailing}
         </div>
       </div>
@@ -39,7 +35,7 @@ export const FloatingInput = forwardRef<HTMLInputElement, FloatingInputProps>(
   },
 );
 
-/* ---- Select with a static top label -------------------------------------- */
+/* ---- Select with a label above ------------------------------------------- */
 
 interface SelectFieldProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   id: string;
@@ -50,27 +46,24 @@ interface SelectFieldProps extends React.SelectHTMLAttributes<HTMLSelectElement>
 export const SelectField = forwardRef<HTMLSelectElement, SelectFieldProps>(
   function SelectField({ id, label, className, children, ...props }, ref) {
     return (
-      <div className="flex h-touch-target items-center rounded-lg border border-outline-variant bg-surface-container-lowest px-4 transition-all focus-within:border-2 focus-within:border-primary">
-        <div className="relative h-full flex-1 pt-2">
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor={id} className="font-label-md text-label-md text-on-surface-variant">
+          {label}
+        </label>
+        <div className="flex h-touch-target items-center rounded-lg border border-outline-variant bg-surface-container-lowest px-4 transition-all focus-within:border-2 focus-within:border-primary">
           <select
             ref={ref}
             id={id}
             className={cn(
-              "peer h-full w-full appearance-none border-none bg-transparent p-0 pt-1 text-body-md text-on-surface outline-none focus:ring-0",
+              "h-full w-full appearance-none border-none bg-transparent text-body-md text-on-surface outline-none focus:ring-0",
               className,
             )}
             {...props}
           >
             {children}
           </select>
-          <label
-            htmlFor={id}
-            className="absolute left-0 top-1 font-label-md text-label-md text-on-surface-variant"
-          >
-            {label}
-          </label>
+          <Icon name="expand_more" className="pointer-events-none text-on-surface-variant" />
         </div>
-        <Icon name="expand_more" className="pointer-events-none text-on-surface-variant" />
       </div>
     );
   },
@@ -86,7 +79,7 @@ interface TextareaFieldProps extends React.TextareaHTMLAttributes<HTMLTextAreaEl
 export const TextareaField = forwardRef<HTMLTextAreaElement, TextareaFieldProps>(
   function TextareaField({ id, label, className, ...props }, ref) {
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-1.5">
         <label htmlFor={id} className="font-label-md text-label-md text-on-surface-variant">
           {label}
         </label>

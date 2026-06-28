@@ -45,20 +45,6 @@ body {
   box-shadow: 0px 4px 20px rgba(15, 45, 86, 0.08);
 }
 
-/* ---- Floating-label inputs (matches the Stitch exports) ------------------ */
-.floating-label-input label {
-  transition: all 0.2s ease-out;
-  pointer-events: none;
-}
-
-.floating-label-input:focus-within label,
-.floating-label-input input:not(:placeholder-shown) + label,
-.floating-label-input textarea:not(:placeholder-shown) + label {
-  transform: translateY(-20px) scale(0.85);
-  color: #001839;
-  font-weight: 600;
-}
-
 /* Hide scrollbars for horizontal chip rows. */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
