@@ -52,7 +52,9 @@ export async function subscribeToPush(memberId: string): Promise<PushResult> {
   if (!subscription) {
     subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array(vapid),
+      // Cast needed: TS 5.7 types `Uint8Array` as `Uint8Array<ArrayBufferLike>`,
+      // which the Web Push `BufferSource` type won't accept directly.
+      applicationServerKey: urlBase64ToUint8Array(vapid) as unknown as BufferSource,
     });
   }
 

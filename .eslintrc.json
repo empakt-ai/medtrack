@@ -1,4 +1,8 @@
 {
   "extends": "next/core-web-vitals",
-  "ignorePatterns": ["public/sw.js", "public/workbox-*.js", "public/fallback-*.js"]
+  "ignorePatterns": ["public/sw.js", "public/workbox-*.js", "public/fallback-*.js"],
+  "rules": {
+    "@next/next/no-page-custom-font": "off",
+    "@next/next/google-font-display": "off"
+  }
 }
